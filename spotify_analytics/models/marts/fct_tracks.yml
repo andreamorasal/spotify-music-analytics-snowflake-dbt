@@ -1,0 +1,84 @@
+
+version: 2
+
+models:
+  - name: fct_tracks
+    description: >
+      Track-level analytical table containing the original Spotify
+      track records and derived duration in minutes. Each row
+      represents one source record, identified by source_row_id.
+      Repeated artist and song combinations are retained.
+
+    columns:
+      - name: source_row_id
+        description: Unique identifier for each original source record.
+        data_tests:
+          - unique
+          - not_null
+
+      - name: song_title
+        description: Track title.
+        data_tests:
+          - not_null
+
+      - name: artist
+        description: Artist name.
+        data_tests:
+          - not_null
+
+      - name: duration_ms
+        description: Original track duration in milliseconds.
+        data_tests:
+          - not_null
+
+      - name: duration_minutes
+        description: Track duration converted into minutes and rounded to two decimal places.
+        data_tests:
+          - not_null
+
+      - name: danceability
+        description: Danceability score between 0 and 1.
+
+      - name: energy
+        description: Energy score between 0 and 1.
+
+      - name: acousticness
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: danceability
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: instrumentalness
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: liveness
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: speechiness
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: valence
+        description: Musical positivity score between 0 and 1.
+
+      - name: target
+        description: Binary target label supplied by the dataset. Its business meaning has not yet been verified.

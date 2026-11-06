@@ -1,0 +1,110 @@
+
+version: 2
+
+models:
+  - name: stg_spotify_tracks
+    description: >
+      Staging model containing the original Spotify track records,
+      with standardised column names and source data types.
+      Preserves all source records without removing repeated songs.
+
+    columns:
+      - name: source_row_id
+        description: "Unique identifier assigned to each record in the original dataset."
+        tests:
+          - unique
+          - not_null
+
+      - name: song_title
+        description: "Title of the track."
+        tests:
+          - not_null
+
+      - name: artist
+        description: "Artist associated with the track."
+        tests:
+          - not_null
+
+      - name: acousticness
+        description: "Confidence measure of whether a track is acoustic, ranging from 0 to 1."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: danceability
+        description: "Measure of how suitable a track is for dancing, ranging from 0 to 1."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: duration_ms
+        description: "Track duration in milliseconds."
+
+      - name: energy
+        description: "Measure of perceived intensity and activity, ranging from 0 to 1."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: instrumentalness
+        description: "Predicts whether a track contains vocals, ranging from 0 to 1. Higher values indicate greater likelihood of instrumental content."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: musical_key
+        description: "Musical key value recorded in the original dataset."
+
+      - name: liveness
+        description: "Detects the presence of an audience in a recording, ranging from 0 to 1."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: loudness
+        description: "Overall loudness of the track, measured in decibels."
+
+      - name: mode
+        description: "Musical mode value recorded in the original dataset."
+
+      - name: speechiness
+        description: "Detects the presence of spoken words in a track, ranging from 0 to 1."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: tempo
+        description: "Estimated tempo of the track, measured in beats per minute."
+
+      - name: time_signature
+        description: "Estimated time signature of the track."
+
+      - name: valence
+        description: "Measure of the musical positivity conveyed by a track, ranging from 0 to 1."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: target
+        description: "Binary target label supplied by the original dataset. Its business meaning has not yet been verified."

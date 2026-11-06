@@ -1,0 +1,91 @@
+
+version: 2
+
+models:
+  - name: mart_artist_performance
+    description: >
+      Artist-level analytical table containing the number of track
+      records and average audio features for each artist. Each row
+      represents one artist. Repeated track records are retained
+      in the calculations.
+
+    columns:
+      - name: artist
+        description: Artist name used to group track records.
+        data_tests:
+          - unique
+          - not_null
+
+      - name: total_tracks
+        description: Number of source track records associated with the artist.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+
+      - name: avg_danceability
+        description: Average danceability score across the artist's track records.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: avg_energy
+        description: Average energy score across the artist's track records.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: avg_valence
+        description: Average valence score across the artist's track records.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: avg_acousticness
+        description: Average acousticness score across the artist's track records.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: avg_instrumentalness
+        description: Average instrumentalness score across the artist's track records.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: avg_duration_minutes
+        description: Average track duration in minutes.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: avg_tempo
+        description: Average tempo in beats per minute.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: avg_loudness
+        description: Average loudness in decibels.
+        data_tests:
+          - not_null

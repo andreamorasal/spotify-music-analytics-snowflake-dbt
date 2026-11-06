@@ -1,0 +1,20 @@
+SELECT
+    SOURCE_ROW_ID,
+    ACOUSTICNESS,
+    DANCEABILITY,
+    DURATION_MS,
+    ENERGY,
+    INSTRUMENTALNESS,
+    MUSICAL_KEY,
+    LIVENESS,
+    LOUDNESS,
+    MODE,
+    SPEECHINESS,
+    TEMPO,
+    TIME_SIGNATURE,
+    VALENCE,
+    TARGET,
+    SONG_TITLE,
+    ARTIST
+
+FROM {{ source('spotify', 'spotify_tracks') }}
