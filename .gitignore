@@ -2,9 +2,6 @@
 .DS_Store
 **/.DS_Store
 
-# Local dataset
-data/*.csv
-
 # Logs
 logs/
 
